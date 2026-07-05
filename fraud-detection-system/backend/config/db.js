@@ -10,6 +10,7 @@
  * tracing/metrics in one place.
  */
 
+
 const { Pool } = require('pg');
 const env = require('./env');
 const logger = require('../utils/logger');
@@ -20,7 +21,12 @@ const pool = new Pool({
   database: env.db.database,
   user: env.db.user,
   password: env.db.password,
-  max: 20,               // max simultaneous connections in the pool
+
+  ssl: {
+    rejectUnauthorized: false,
+  },
+
+  max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 5000,
 });
@@ -39,8 +45,11 @@ async function query(text, params) {
   return result;
 }
 
+pool.connect()
+  .then(() => console.log("✅ Connected to Neon PostgreSQL"))
+  .catch(err => console.error("❌ Connection Failed:", err.message));
+
 async function getClient() {
-  // Used for multi-statement transactions (BEGIN/COMMIT/ROLLBACK)
   return pool.connect();
 }
 
