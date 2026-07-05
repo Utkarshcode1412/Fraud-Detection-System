@@ -16,7 +16,7 @@ export function AuthProvider({ children }) {
   const [admin, setAdmin] = useState(() => {
     const stored = localStorage.getItem('sentry_admin');
     return stored ? JSON.parse(stored) : null;
-  });
+  });  
 
   const login = useCallback(async (email, password) => {
     const { data } = await authApi.login(email, password);
