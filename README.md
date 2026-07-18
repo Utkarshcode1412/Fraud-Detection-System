@@ -16,7 +16,7 @@ fraud-detection-system/
 ├── ml-service/         # Python ML pipeline + Flask API
 │   ├── ml/              # train.py, predict.py, preprocess.py, etc.
 │   ├── routes/           # Flask blueprints
-│   ├── services/          # prediction\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_service.py
+│   ├── services/          # prediction_service.py
 │   ├── utils/              # validators.py
 │   ├── data/                 # synthetic dataset + generator
 │   ├── artifacts/              # trained model/scaler/encoder (generated)
@@ -34,7 +34,7 @@ Quick start
 ```bash
 cd ml-service
 pip install -r requirements.txt
-python3 data/generate\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_data.py     # generates synthetic transactions.csv
+python3 data/generate_data.py     # generates synthetic transactions.csv
 python3 -m ml.train                # trains models, writes artifacts/ + reports/
 ```
 
@@ -47,15 +47,15 @@ python3 app.py       # runs on http://localhost:5001
 
 3. PostgreSQL database
 ```bash
-createdb fraud\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_detection
-psql fraud\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_detection -f database/01\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_schema.sql
-psql fraud\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_detection -f database/02\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_views.sql
-psql fraud\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_detection -f database/04\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_seed.sql
+createdb fraud_detection
+psql fraud_detection -f database/01_schema.sql
+psql fraud_detection -f database/02_views.sql
+psql fraud_detection -f database/04_seed.sql
 ```
 4. Node.js backend
 ```bash
 cd backend
-cp .env.example .env      # fill in your DB credentials + ML\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_SERVICE\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_API\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\_KEY
+cp .env.example .env      # fill in your DB credentials + ML_SERVICE_API_KEY
 npm install
 npm run dev                 # runs on http://localhost:5000
 ```
